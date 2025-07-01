@@ -53,7 +53,7 @@ Dataset digunakan dari Kaggle: [Top 50 Spotify Songs - 2019](https://www.kaggle.
 ### Informasi Dataset
 Informasi dataset diberikan menggunakan fungsi `data.info()`. Berikut adalah hasilnya:
 
- #  | Column           | Non-Null Count | Dtype  
+no  | Column           | Non-Null Count | Dtype  
 --- | ------           | -------------- | -----  
  0  | Unnamed: 0       | 50 non-null    | int64  
  1  | Track.Name       | 50 non-null    | object 
