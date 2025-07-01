@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Segmentasi Lagu Populer Spotify 2019
+# Laporan Proyek Segmentasi Lagu Populer Spotify 2019 - Arief Prasetya N
 
 ## Domain Proyek
 
