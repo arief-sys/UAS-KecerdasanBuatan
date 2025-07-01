@@ -44,68 +44,39 @@ Untuk mencapai tujuan, langkah-langkah sebagai berikut dilakukan:
 4. Evaluasi & Visualisasi
    Menggunakan Elbow Method, PCA, dan scatter plot untuk visualisasi hasil klaster.
 
-### Problem Statements
-
-1. **Bagaimana mengelompokkan lagu-lagu populer di Spotify berdasarkan kesamaan fitur audio?**
-   Lagu populer dapat berbeda secara genre, tempo, dan intensitas. Segmentasi akan membantu memahami grup lagu yang serupa.
-
-2. **Fitur audio apa saja yang paling memengaruhi pengelompokan lagu-lagu tersebut?**
-   Dengan mengamati hasil klastering, dapat dievaluasi fitur dominan yang menjadi pembeda antar klaster.
-
-3. **Bagaimana visualisasi dan interpretasi dari hasil segmentasi dapat digunakan untuk analisis bisnis atau rekomendasi musik?**
-
-### Goals
-
-* Mengelompokkan 50 lagu populer Spotify tahun 2019 berdasarkan fitur audio menggunakan K-Means Clustering.
-* Menyediakan visualisasi dari hasil klastering untuk interpretasi yang mudah.
-* Mengidentifikasi karakteristik unik dari tiap klaster.
-
-### Solution Statement
-
-Untuk mencapai tujuan, langkah-langkah sebagai berikut dilakukan:
-
-1. **Exploratory Data Analysis (EDA)**: Menyajikan statistik deskriptif dan visualisasi fitur lagu.
-2. **Preprocessing**: Seleksi dan normalisasi fitur numerik.
-3. **K-Means Clustering**: Menentukan jumlah klaster optimal dan melakukan segmentasi lagu.
-4. **Evaluasi & Visualisasi**: Menggunakan Elbow Method, PCA, dan scatter plot untuk visualisasi hasil klaster.
-
 ## Data Understanding
 
-### Dataset
-
+### Deskripsi Dataset
 Dataset digunakan dari Kaggle: [Top 50 Spotify Songs - 2019](https://www.kaggle.com/datasets/leonardopena/top50spotify2019)
-
 * Jumlah data: 50 lagu
 * Fitur utama: `Beats.Per.Minute`, `Energy`, `Danceability`, `Loudness..dB..`, `Liveness`, `Valence.`, `Length.`, `Acousticness..`, `Speechiness.`, `Popularity`
-
 ### Informasi Dataset
 Informasi dataset diberikan menggunakan fungsi `data.info()`. Berikut adalah hasilnya:
 
- #   Column            Non-Null Count  Dtype  
----  ------            --------------  -----  
- 0   Unnamed: 0        50 non-null     int64  
- 1   Track.Name        50 non-null     object 
- 2   Artist.Name       50 non-null     object 
- 3   Genre             50 non-null     object 
- 4   Beats.Per.Minute  50 non-null     int64  
- 5   Energy            50 non-null     int64  
- 6   Danceability      50 non-null     int64  
- 7   Loudness..dB..    50 non-null     int64  
- 8   Liveness          50 non-null     int64  
- 9   Valence.          50 non-null     int64  
- 10  Length.           50 non-null     int64  
- 11  Acousticness..    50 non-null     int64  
- 12  Speechiness.      50 non-null     int64  
- 13  Popularity        50 non-null     int64  
- 14  Cluster           50 non-null     int32  
- 15  PCA1              50 non-null     float64
- 16  PCA2              50 non-null     float64
+ #  | Column           | Non-Null Count | Dtype  
+--- | ------           | -------------- | -----  
+ 0  | Unnamed: 0       | 50 non-null    | int64  
+ 1  | Track.Name       | 50 non-null    | object 
+ 2  | Artist.Name      | 50 non-null    | object 
+ 3  | Genre            | 50 non-null    | object 
+ 4  | Beats.Per.Minute | 50 non-null    | int64  
+ 5  | Energy           | 50 non-null    | int64  
+ 6  | Danceability     | 50 non-null    | int64  
+ 7  | Loudness..dB..   | 50 non-null    | int64  
+ 8  | Liveness         | 50 non-null    | int64  
+ 9  | Valence.         | 50 non-null    | int64  
+ 10 | Length.          | 50 non-null    | int64  
+ 11 | Acousticness..   | 50 non-null    | int64  
+ 12 | Speechiness.     | 50 non-null    | int64  
+ 13 | Popularity       | 50 non-null    | int64  
+ 14 | Cluster          | 50 non-null    | int32  
+ 15 | PCA1             | 50 non-null    | float64
+ 16 | PCA2             | 50 non-null    | float64
 
 ### Statistik Deskriptif
+Berikut adalah statistik deskriptif untuk fitur numerik dalam dataset:
+![image](https://github.com/user-attachments/assets/244551a2-7a04-4eec-a90e-75c838b58737)
 
-* Fitur `Energy` berkisar dari 33 hingga 98.
-* Fitur `Danceability` menunjukkan variasi tinggi antara lagu.
-* Tidak ditemukan nilai null, dan semua fitur yang digunakan bertipe numerik.
 
 ## Data Preparation
 
