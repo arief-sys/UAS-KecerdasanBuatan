@@ -89,13 +89,11 @@ Danceability dan acousticness memiliki hubungan terbalik. Lagu dengan nilai danc
 Hasil reduksi dimensi menggunakan PCA menunjukkan visualisasi klaster yang cukup terpisah antar segmen. Hal ini menunjukkan bahwa fitur numerik mampu menangkap karakteristik unik tiap kelompok lagu.
 ### 5. Distribusi Popularity dan Speechiness
 Lagu-lagu dengan popularitas tinggi tidak selalu memiliki nilai speechiness tinggi. Ini menunjukkan bahwa kandungan lirik atau rap bukan satu-satunya indikator popularitas.
-
 ## Kesimpulan Data Understanding
 - Dataset sudah bersih, tidak memiliki missing value.
 - Fitur numerik memiliki sebaran yang bervariasi dan mencerminkan keberagaman genre/popularitas.
 - Terdapat korelasi visual antara beberapa fitur (contoh: energy vs loudness, danceability vs acousticness).
 - Visualisasi PCA memperkuat pemisahan antar klaster, yang mendukung proses clustering menggunakan K-Means.
-
 ## Data Preparation
 1. Seleksi Fitur Numerik
    Dipilih fitur yang relevan untuk clustering, yaitu:
@@ -119,21 +117,21 @@ Lagu-lagu dengan popularitas tinggi tidak selalu memiliki nilai speechiness ting
 Dataset yang telah diproses ini siap digunakan untuk pelatihan model clustering menggunakan K-Means.
 
 ## Modeling
-# K-Means Clustering
+### K-Means Clustering
 K-Means Clustering merupakan algoritma unsupervised learning yang bertujuan membagi data ke dalam k klaster berdasarkan kemiripan antar fitur.
-1. Pemilihan Jumlah Klaster (k)
+### 1. Pemilihan Jumlah Klaster (k)
    Elbow Method digunakan untuk menentukan nilai optimal k. Hasil grafik menunjukkan bahwa k = 3 memberikan titik siku (elbow) terbaik, sehingga digunakan untuk klastering.
-2. Inisialisasi Model
+### 2. Inisialisasi Model
    Model KMeans diinisialisasi dengan:
    - n_clusters=3
    - random_state=42
-3. Pelatihan Model
+### 3. Pelatihan Model
    Model dilatih menggunakan data numerik hasil normalisasi.Output berupa label klaster yang ditambahkan ke dalam dataframe.
-4. Reduksi Dimensi untuk Visualisasi
+### 4. Reduksi Dimensi untuk Visualisasi
    Principal Component Analysis (PCA) digunakan untuk mereduksi dimensi ke 2D (PCA1 dan PCA2), sehingga visualisasi klaster menjadi lebih mudah.
-5. Visualisasi Klaster
+### 5. Visualisasi Klaster
    Hasil visualisasi menggunakan scatter plot menunjukkan bahwa lagu-lagu terbagi ke dalam 3 klaster yang cukup terpisah berdasarkan kombinasi fitur.
-6. Interpretasi Klaster
+### 6. Interpretasi Klaster
    - Klaster 0: Lagu dengan energy dan BPM sedang, danceability tinggi.
    - Klaster 1: Lagu akustik atau ballad dengan loudness rendah dan acousticness tinggi.
    - Klaster 2: Lagu dengan energy tinggi dan loudness keras, cenderung genre EDM/pop uptempo.
