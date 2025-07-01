@@ -79,15 +79,15 @@ Berikut adalah statistik deskriptif untuk fitur numerik dalam dataset:
 
 ## Exploratory Data Analysis (EDA)
 
-1. Distribusi Beats Per Minute (BPM)
+1. **Distribusi Beats Per Minute (BPM)**
    Tempo lagu (BPM) dalam dataset bervariasi dari 85 hingga 190 BPM, dengan rata-rata sekitar 120 BPM. Ini menunjukkan campuran lagu lambat hingga cepat.
-2. Distribusi Energy dan Loudness
+2. **Distribusi Energy dan Loudness**
    Nilai energy dan loudness menunjukkan seberapa "kuat" atau intens lagu tersebut. Lagu dengan nilai energy tinggi cenderung juga memiliki loudness yang lebih tinggi (lebih keras).Beberapa lagu memiliki energy rendah dengan loudness rendah, menandakan lagu slow.
-3. Danceability vs Acousticness
+3. **Danceability vs Acousticness**
    Danceability dan acousticness memiliki hubungan terbalik. Lagu dengan nilai danceability tinggi cenderung memiliki nilai acousticness rendah, yang umum ditemukan pada lagu pop, EDM, dan dance.
-4. PCA1 vs PCA2 (Visualisasi Klaster)
+4.** PCA1 vs PCA2 (Visualisasi Klaster)**
    Hasil reduksi dimensi menggunakan PCA menunjukkan visualisasi klaster yang cukup terpisah antar segmen. Hal ini menunjukkan bahwa fitur numerik mampu menangkap karakteristik unik tiap kelompok lagu.
-5. Distribusi Popularity dan Speechiness
+5. **Distribusi Popularity dan Speechiness**
    Lagu-lagu dengan popularitas tinggi tidak selalu memiliki nilai speechiness tinggi. Ini menunjukkan bahwa kandungan lirik atau rap bukan satu-satunya indikator popularitas.
 
 ### Kesimpulan Data Understanding
