@@ -6,45 +6,43 @@ Musik telah menjadi bagian integral dari kehidupan manusia dan terus berkembang 
 
 Salah satu pendekatan yang efektif dalam mengelompokkan lagu berdasarkan kesamaan fitur adalah teknik clustering, khususnya K-Means Clustering. Algoritma ini mampu membagi kumpulan lagu menjadi beberapa grup yang serupa secara otomatis berdasarkan fitur seperti tempo, energi, danceability, dan lainnya. Segmentasi ini dapat digunakan oleh perusahaan musik, pengembang aplikasi rekomendasi, dan pengguna umum untuk mengatur playlist atau memahami selera musik berdasarkan data.
 
-Referensi
--Schedl, M., Zamani, H., Chen, C.-W., Deldjoo, Y., & Elahi, M. (2018). Current Challenges and Visions in Music Recommender Systems Research. International Journal of Multimedia Information Retrieval, 7, 95–116. https://doi.org/10.1007/s13735-018-0154-2
+## Referensi
+- Schedl, M., Zamani, H., Chen, C.-W., Deldjoo, Y., & Elahi, M. (2018). Current Challenges and Visions in Music Recommender Systems Research. International Journal of Multimedia Information Retrieval, 7, 95–116. https://doi.org/10.1007/s13735-018-0154-2
 
--Wang, Y., & Zhang, D. (2020). Music Recommendation System Based on Clustering and Deep Learning. International Conference on Artificial Intelligence and Big Data. https://doi.org/10.1109/ICAIBD49188.2020.9137379
+- Wang, Y., & Zhang, D. (2020). Music Recommendation System Based on Clustering and Deep Learning. International Conference on Artificial Intelligence and Big Data. https://doi.org/10.1109/ICAIBD49188.2020.9137379
 
--Tzanetakis, G., & Cook, P. (2002). Musical genre classification of audio signals. IEEE Transactions on Speech and Audio Processing, 10(5), 293–302. https://doi.org/10.1109/TSA.2002.800560
+- Tzanetakis, G., & Cook, P. (2002). Musical genre classification of audio signals. IEEE Transactions on Speech and Audio Processing, 10(5), 293–302. https://doi.org/10.1109/TSA.2002.800560
 
--Lee, J.-H., & Cunningham, S. J. (2013). The Impact (or Non-Impact) of User Studies in Music Information Retrieval. Journal of the American Society for Information Science and Technology, 64(3), 409–425. https://doi.org/10.1002/asi.22745
+- Lee, J.-H., & Cunningham, S. J. (2013). The Impact (or Non-Impact) of User Studies in Music Information Retrieval. Journal of the American Society for Information Science and Technology, 64(3), 409–425. https://doi.org/10.1002/asi.22745
 
--Celma, Ò. (2010). Music Recommendation and Discovery: The Long Tail, Long Fail, and Long Play in the Digital Music Space. Springer.
+- Celma, Ò. (2010). Music Recommendation and Discovery: The Long Tail, Long Fail, and Long Play in the Digital Music Space. Springer.
 
 ## Business Understanding
-Problem Statements
+## Problem Statements
+1. **Bagaimana mengelompokkan lagu-lagu populer di Spotify berdasarkan kesamaan fitur audio?**
+   Lagu populer dapat berbeda secara genre, tempo, dan intensitas. Segmentasi akan membantu memahami grup lagu yang serupa dengan menggunakan algoritma K-Means berdasarkan fitur numerik seperti energy, danceability, loudness, dsb.
 
-Bagaimana mengelompokkan lagu-lagu populer di Spotify berdasarkan kesamaan fitur audio?Lagu populer dapat berbeda secara genre, tempo, dan intensitas. Segmentasi akan membantu memahami grup lagu yang serupa.
+2.  **Fitur audio apa saja yang paling memengaruhi pengelompokan lagu-lagu tersebut?**
+   Dengan mengamati hasil klastering dan distribusi fitur per klaster, dapat dievaluasi fitur dominan yang menjadi pembeda antar klaster seperti energy, loudness, acousticness, atau valence.
 
-Fitur audio apa saja yang paling memengaruhi pengelompokan lagu-lagu tersebut?Dengan mengamati hasil klastering, dapat dievaluasi fitur dominan yang menjadi pembeda antar klaster.
+3. **Bagaimana visualisasi dan interpretasi dari hasil segmentasi dapat digunakan untuk analisis bisnis atau rekomendasi musik?**
+   Visualisasi seperti scatter plot (PCA), bar chart, dan heatmap membantu pemahaman klaster. Informasi ini dapat digunakan untuk membuat playlist otomatis, meningkatkan sistem rekomendasi lagu, atau analisis pasar berdasarkan gaya lagu yang disukai audiens.
 
-Bagaimana visualisasi dan interpretasi dari hasil segmentasi dapat digunakan untuk analisis bisnis atau rekomendasi musik?
+## Goals
+1. Mengelompokkan 50 lagu populer Spotify tahun 2019 berdasarkan fitur audio menggunakan K-Means Clustering.
+2. Menyediakan visualisasi dari hasil klastering untuk interpretasi yang mudah.
+3. Mengidentifikasi karakteristik unik dari tiap klaster.
 
-Goals
-
-Mengelompokkan 50 lagu populer Spotify tahun 2019 berdasarkan fitur audio menggunakan K-Means Clustering.
-
-Menyediakan visualisasi dari hasil klastering untuk interpretasi yang mudah.
-
-Mengidentifikasi karakteristik unik dari tiap klaster.
-
-Solution Statement
-
+## Solution Statement
 Untuk mencapai tujuan, langkah-langkah sebagai berikut dilakukan:
-
-Exploratory Data Analysis (EDA): Menyajikan statistik deskriptif dan visualisasi fitur lagu.
-
-Preprocessing: Seleksi dan normalisasi fitur numerik.
-
-K-Means Clustering: Menentukan jumlah klaster optimal dan melakukan segmentasi lagu.
-
-Evaluasi & Visualisasi: Menggunakan Elbow Method, PCA, dan scatter plot untuk visualisasi hasil klaster.
+1. Exploratory Data Analysis (EDA)
+   Menyajikan statistik deskriptif dan visualisasi fitur lagu.
+2. Preprocessing
+   Seleksi dan normalisasi fitur numerik.
+3. K-Means Clustering:
+   Menentukan jumlah klaster optimal dan melakukan segmentasi lagu.
+4. Evaluasi & Visualisasi
+   Menggunakan Elbow Method, PCA, dan scatter plot untuk visualisasi hasil klaster.
 
 ### Problem Statements
 
