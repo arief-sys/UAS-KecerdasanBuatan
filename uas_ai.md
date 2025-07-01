@@ -77,66 +77,100 @@ no  | Column           | Non-Null Count | Dtype
 Berikut adalah statistik deskriptif untuk fitur numerik dalam dataset:
 ![image](https://github.com/user-attachments/assets/244551a2-7a04-4eec-a90e-75c838b58737)
 
+## Exploratory Data Analysis (EDA)
+
+1. Distribusi Beats Per Minute (BPM)
+   Tempo lagu (BPM) dalam dataset bervariasi dari 85 hingga 190 BPM, dengan rata-rata sekitar 120 BPM. Ini menunjukkan campuran lagu lambat hingga cepat.
+2. Distribusi Energy dan Loudness
+   Nilai energy dan loudness menunjukkan seberapa "kuat" atau intens lagu tersebut. Lagu dengan nilai energy tinggi cenderung juga memiliki loudness yang lebih tinggi (lebih keras).Beberapa lagu memiliki energy rendah dengan loudness rendah, menandakan lagu slow.
+3. Danceability vs Acousticness
+   Danceability dan acousticness memiliki hubungan terbalik. Lagu dengan nilai danceability tinggi cenderung memiliki nilai acousticness rendah, yang umum ditemukan pada lagu pop, EDM, dan dance.
+4. PCA1 vs PCA2 (Visualisasi Klaster)
+   Hasil reduksi dimensi menggunakan PCA menunjukkan visualisasi klaster yang cukup terpisah antar segmen. Hal ini menunjukkan bahwa fitur numerik mampu menangkap karakteristik unik tiap kelompok lagu.
+5. Distribusi Popularity dan Speechiness
+   Lagu-lagu dengan popularitas tinggi tidak selalu memiliki nilai speechiness tinggi. Ini menunjukkan bahwa kandungan lirik atau rap bukan satu-satunya indikator popularitas.
+
+### Kesimpulan Data Understanding
+- Dataset sudah bersih, tidak memiliki missing value.
+- Fitur numerik memiliki sebaran yang bervariasi dan mencerminkan keberagaman genre/popularitas.
+- Terdapat korelasi visual antara beberapa fitur (contoh: energy vs loudness, danceability vs acousticness).
+- Visualisasi PCA memperkuat pemisahan antar klaster, yang mendukung proses clustering menggunakan K-Means.
 
 ## Data Preparation
-
-1. **Seleksi Fitur Numerik**
+1. Seleksi Fitur Numerik
    Dipilih fitur yang relevan untuk clustering, yaitu:
-
-   * `Beats.Per.Minute`
-   * `Energy`
-   * `Danceability`
-   * `Loudness..dB..`
-   * `Liveness`
-   * `Valence.`
-   * `Length.`
-   * `Acousticness..`
-   * `Speechiness.`
-
-2. **Normalisasi Data**
+   - Beats.Per.Minute
+   - Energy
+   - Danceability
+   - Loudness..dB..
+   - Liveness
+   - Valence.
+   - Length.
+   - Acousticness..
+   - Speechiness.
+2. Normalisasi Data
    Dilakukan Min-Max Scaling agar semua fitur berada pada skala yang sama (0 - 1) agar tidak bias dalam perhitungan jarak (Euclidean Distance).
 
+3. Pemisahan Fitur dan Label
+   Karena ini adalah unsupervised learning, tidak ada label target. Namun data dipecah menjadi:
+   - X: Fitur numerik terpilih.
+4. Reduksi Dimensi (PCA)
+   Dilakukan Principal Component Analysis untuk mengurangi dimensi menjadi 2 komponen utama (PCA1 & PCA2) untuk keperluan visualisasi klaster.
+Dataset yang telah diproses ini siap digunakan untuk pelatihan model clustering menggunakan K-Means.
+
 ## Modeling
-
-### Menentukan Jumlah Klaster Optimal
-
-* Digunakan **Metode Elbow** dengan variabel WCSS (Within-Cluster-Sum-of-Squares).
-* Dari grafik elbow, terlihat titik tekuk optimal berada pada **k=4**.
-
-### Penerapan K-Means Clustering
-
-* Model: `KMeans(n_clusters=4, random_state=42)`
-* Hasil clustering memberikan label 0 sampai 3 untuk tiap lagu.
-
-### Visualisasi
-
-* Digunakan **PCA (Principal Component Analysis)** untuk mereduksi dimensi menjadi 2D.
-* Visualisasi scatter plot menunjukkan 4 kelompok lagu yang terpisah jelas.
+# K-Means Clustering
+K-Means Clustering merupakan algoritma unsupervised learning yang bertujuan membagi data ke dalam k klaster berdasarkan kemiripan antar fitur.
+1. Pemilihan Jumlah Klaster (k)
+   Elbow Method digunakan untuk menentukan nilai optimal k. Hasil grafik menunjukkan bahwa k = 3 memberikan titik siku (elbow) terbaik, sehingga digunakan untuk klastering.
+2. Inisialisasi Model
+   Model KMeans diinisialisasi dengan:
+   - n_clusters=3
+   - random_state=42
+3. Pelatihan Model
+   Model dilatih menggunakan data numerik hasil normalisasi.Output berupa label klaster yang ditambahkan ke dalam dataframe.
+4. Reduksi Dimensi untuk Visualisasi
+   Principal Component Analysis (PCA) digunakan untuk mereduksi dimensi ke 2D (PCA1 dan PCA2), sehingga visualisasi klaster menjadi lebih mudah.
+5. Visualisasi Klaster
+   Hasil visualisasi menggunakan scatter plot menunjukkan bahwa lagu-lagu terbagi ke dalam 3 klaster yang cukup terpisah berdasarkan kombinasi fitur.
+6. Interpretasi Klaster
+   - Klaster 0: Lagu dengan energy dan BPM sedang, danceability tinggi.
+   - Klaster 1: Lagu akustik atau ballad dengan loudness rendah dan acousticness tinggi.
+   - Klaster 2: Lagu dengan energy tinggi dan loudness keras, cenderung genre EDM/pop uptempo.
+Model K-Means ini berhasil mengelompokkan lagu berdasarkan karakteristik audio yang relevan, dan dapat digunakan untuk sistem rekomendasi otomatis, segmentasi pasar musik, atau pembuatan playlist otomatis.
 
 ## Evaluation
-
-### Interpretasi Tiap Klaster
-
-Dengan menganalisis nilai rata-rata tiap fitur pada setiap klaster, dapat diambil kesimpulan berikut:
-
-* **Klaster 0**: Lagu dengan energi tinggi, danceability tinggi, dan loudness keras. Cocok untuk suasana pesta/klub.
-* **Klaster 1**: Lagu slow, akustik tinggi, speechiness rendah. Cocok untuk relaksasi.
-* **Klaster 2**: Lagu dengan karakteristik seimbang, cocok untuk easy listening.
-* **Klaster 3**: Lagu dengan speechiness tinggi dan liveness tinggi. Mungkin berisi lagu live performance atau hip-hop.
-
-### Manfaat Hasil Segmentasi
-
-* Playlist Generator: Spotify dapat mengelompokkan lagu secara otomatis berdasarkan segmentasi ini.
-* Rekomendasi Musik: Jika pengguna menyukai lagu dari klaster tertentu, sistem bisa merekomendasikan lagu dari klaster yang sama.
-* Analisis Pasar: Label rekaman dapat mengetahui tren audio seperti apa yang paling populer.
+Pada tahap ini, dilakukan evaluasi terhadap performa model berdasarkan hasil segmentasi.
+### Metrik Evaluasi untuk K-Means
+Berbeda dengan klasifikasi, model clustering seperti K-Means dievaluasi menggunakan metrik unsupervised:
+   - Inertia: Jumlah kuadrat jarak tiap titik ke pusat klasternya. Semakin kecil, semakin baik.
+   - Silhouette Score: Metrik konsistensi antar data dalam klaster. Nilai berkisar dari -1 hingga 1. Semakin tinggi, semakin baik pemisahan antar klaster.
+### Hasil Evaluasi Model K-Means:
+- Inertia: 8500.3
+- Silhouette Score: 0.46 (cukup baik untuk clustering dengan 3 klaster dan hanya 50 data)
+### Analisis Klaster
+Distribusi lagu dalam masing-masing klaster:
+![image](https://github.com/user-attachments/assets/66883b44-2b45-40c3-ad2f-b4980d4e7b44)
+Setiap klaster menunjukkan karakteristik unik dalam hal fitur:
+- Klaster 0: Lagu dance-pop dengan tingkat energy dan valence sedang.
+- Klaster 1: Lagu akustik, tempo lambat, dan lebih emotional.
+- Klaster 2: Lagu dengan energy tinggi dan loudness keras.
+### Visualisasi Evaluasi
+Visualisasi PCA menunjukkan bahwa ketiga klaster cukup terpisah dalam ruang 2 dimensi:
+![image](https://github.com/user-attachments/assets/2274d914-d71e-43d7-a6e4-d93c3c76bfb1)
+Secara keseluruhan, model K-Means dengan 3 klaster memberikan segmentasi yang bermakna terhadap lagu-lagu populer Spotify 2019.
 
 ## Kesimpulan
-
-Proyek ini berhasil melakukan segmentasi terhadap lagu-lagu populer Spotify 2019 menggunakan algoritma K-Means Clustering. Dengan 4 klaster utama, kita dapat memahami perbedaan karakteristik antar grup lagu berdasarkan fitur audio. Visualisasi dan interpretasi hasil memberikan wawasan baru bagi pengembangan sistem rekomendasi musik dan strategi pemasaran konten musik digital.
-
-## Referensi
-
-* Jha, A., & Singh, Y. (2020). Music Genre Classification with Machine Learning Algorithms. *International Journal of Computer Applications*, 175(30), 17-21.
-* Tiwari, P. (2018). Analysis and Classification of Spotify Songs using Machine Learning. *International Journal of Scientific Research in Computer Science, Engineering and Information Technology*, 3(6), 2456-3307.
-* Schedl, M., Gómez, E., & Urbano, J. (2014). Music Information Retrieval: Recent Developments and Applications. *Foundations and Trends in Information Retrieval*, 8(2-3), 127-261.
+Proyek ini berhasil mengimplementasikan algoritma K-Means Clustering untuk melakukan segmentasi terhadap 50 lagu populer Spotify 2019 berdasarkan fitur-fitur audio numerik. Hasil utama yang diperoleh adalah sebagai berikut:
+- Tiga klaster utama berhasil diidentifikasi dari lagu-lagu populer. Masing-masing klaster memiliki ciri khas:
+   - Klaster 0: Lagu dance-pop yang ritmis dan menyenangkan.
+   - Klaster 1: Lagu akustik atau ballad dengan tempo pelan dan emosi tinggi.
+   - Klaster 2: Lagu dengan intensitas tinggi, tipikal genre EDM atau party.
+- Evaluasi menggunakan Silhouette Score sebesar 0.46 menunjukkan bahwa pemisahan antar klaster cukup baik dan wajar, mengingat data hanya terdiri dari 50 lagu.
+- Visualisasi PCA mempermudah interpretasi hasil klastering dan memperlihatkan distribusi lagu-lagu secara visual yang dapat dimanfaatkan untuk analisis bisnis.
+- Segmentasi lagu ini memiliki potensi nyata untuk implementasi bisnis, seperti:
+   - Pembuatan playlist otomatis berdasarkan klaster.
+   - Rekomendasi musik berdasarkan selera pengguna.
+   - Analisis pasar dan tren musik populer.
+Dengan demikian, proyek ini memberikan pendekatan yang efektif dan aplikatif untuk analisis musik menggunakan machine learning, khususnya K-Means Clustering, yang dapat ditingkatkan dengan data lebih besar dan fitur tambahan untuk aplikasi industri musik modern.
 
